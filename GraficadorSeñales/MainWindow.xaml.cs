@@ -41,7 +41,18 @@ namespace GraficadorSeñales
             double periodoMuestreo = 1.0 / muestro;
 
             plnGrafica.Points.Clear();
-            for( double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+            for (double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
+            {
+                Muestra muestra = new Muestra(i, señal.evaluar(i));
+                señal.Muestras.Add(muestra);
+            }
+
+            foreach(Muestra muestra in señal.Muestras)
+            {
+                plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial));
+            }
+
+            for ( double i = tiempoInicial; i <= tiempoFinal; i += periodoMuestreo)
             {
                 plnGrafica.Points.Add(
                     adaptarCoordenadas(i,señal.evaluar(i),tiempoInicial));
