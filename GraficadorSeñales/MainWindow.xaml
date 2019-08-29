@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Señal Senoidal" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" Text="Amplitud" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtbox_amplitud" HorizontalAlignment="Left" Height="23" Margin="10,62,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Señal Parabolica" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" Text="Amplitud" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="txtbox_amplitud" HorizontalAlignment="Left" Height="23" Margin="10,62,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
         <TextBlock HorizontalAlignment="Left" Margin="340,44,0,0" TextWrapping="Wrap" Text="Tiempo inicial" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,92,0,0" TextWrapping="Wrap" Text="Fase" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtbox_fase" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,143,0,0" TextWrapping="Wrap" Text="Frecuencia" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtbox_frecuencia" HorizontalAlignment="Left" Height="23" Margin="10,164,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,92,0,0" TextWrapping="Wrap" Text="Fase" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="txtbox_fase" HorizontalAlignment="Left" Height="23" Margin="10,113,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,143,0,0" TextWrapping="Wrap" Text="Frecuencia" VerticalAlignment="Top" Visibility="Hidden"/>
+        <TextBox x:Name="txtbox_frecuencia" HorizontalAlignment="Left" Height="23" Margin="10,164,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
         <TextBox x:Name="txtbox_tiempoInicial" HorizontalAlignment="Left" Height="23" Margin="340,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <TextBlock HorizontalAlignment="Left" Margin="340,100,0,0" TextWrapping="Wrap" Text="Tiempo final" VerticalAlignment="Top"/>
         <TextBox x:Name="txtbox_tiempoFinal" HorizontalAlignment="Left" Height="23" Margin="340,122,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
