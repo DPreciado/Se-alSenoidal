@@ -19,14 +19,20 @@ namespace GraficadorSeñales
         {
             double resultado;
 
-            if(tiempo >= 0)
+            if(tiempo > 0)
             {
-                resultado = (tiempo * tiempo) / 2.0;
+                resultado = 1;
             }
-            else
+            else if(tiempo == 0)
             {
                 resultado = 0.0;
             }
+            else
+            {
+                resultado = -1;
+            }
+                
+            
 
             return resultado;
         }
