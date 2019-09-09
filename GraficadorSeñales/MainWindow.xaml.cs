@@ -29,9 +29,7 @@ namespace GraficadorSeñales
 
         private void BtnGraficar_Click(object sender, RoutedEventArgs e)
         {
-            double amplitud = double.Parse(txtbox_amplitud.Text);
-            double fase = double.Parse(txtbox_fase.Text);
-            double frecuencia = double.Parse(txtbox_frecuencia.Text);
+            
             double tiempoInicial = double.Parse(txtbox_tiempoInicial.Text);
             double tiempoFinal = double.Parse(txtbox_tiempoFinal.Text);
             double muestro = double.Parse(txtbox_muestreo.Text);
@@ -78,6 +76,21 @@ namespace GraficadorSeñales
                 (-1 * (
                 y * (((scrGrafica.Height / 2.0) -25) / amplitudMaxima)) +
                 (scrGrafica.Height / 2.0) ));
+        }
+
+        private void CbTipoSeñal_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PanelConfiguracion.Children.Clear();
+            switch(CbTipoSeñal.SelectedIndex)
+            {
+                case 0: //Exponencial
+                    break;
+                case 1: //Senoidal
+                    PanelConfiguracion.Children.Add(new ConfiguracionSeñalSenoidal());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
