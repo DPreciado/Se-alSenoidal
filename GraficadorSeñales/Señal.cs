@@ -8,7 +8,7 @@ namespace GraficadorSeñales
 {
     abstract class Señal
     {
-        public List<Muestra> muestras { get; set; }
+        public List<Muestra> Muestras { get; set; }
         public double TiempoInicial { get; set; }
         public double TiempoFinal { get; set; }
         public double FrecuenciaMuestreo { get; set; }
@@ -21,13 +21,13 @@ namespace GraficadorSeñales
         {
             double periodoMuestreo = 1 / FrecuenciaMuestreo;
 
-            muestras.Clear();
+            Muestras.Clear();
 
             for(double i = TiempoInicial; i <=TiempoFinal; i+=periodoMuestreo)
             {
                 double muestra = evaluar(i);
 
-                muestras.Add(new Muestra(i, muestra));
+                Muestras.Add(new Muestra(i, muestra));
 
                 if(Math.Abs(muestra) > AmplitudMaxima)
                 {
