@@ -59,6 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfiguracionSeñalAudio.xaml.cs">
+      <DependentUpon>ConfiguracionSeñalAudio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ConfiguracionSeñalExponencial.xaml.cs">
       <DependentUpon>ConfiguracionSeñalExponencial.xaml</DependentUpon>
     </Compile>
@@ -70,6 +73,10 @@
     <Compile Include="SeñalExponencial.cs" />
     <Compile Include="SeñalParabolica.cs" />
     <Compile Include="SeñalSenoidal.cs" />
+    <Page Include="ConfiguracionSeñalAudio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ConfiguracionSeñalExponencial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
