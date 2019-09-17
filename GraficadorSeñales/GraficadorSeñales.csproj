@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Muestra.cs" />
     <Compile Include="Señal.cs" />
+    <Compile Include="SeñalAudio.cs" />
     <Compile Include="SeñalExponencial.cs" />
     <Compile Include="SeñalParabolica.cs" />
     <Compile Include="SeñalSenoidal.cs" />

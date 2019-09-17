@@ -59,23 +59,33 @@ namespace GraficadorSeñales
 
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
-                case 2:
+                case 2: //Exponencial
                     double alpha = 
                         double.Parse(
                             ((ConfiguracionSeñalExponencial)(PanelConfiguracion.Children[0])).txt_alpha.Text
                     );
                     señal = new SeñalExponencial(alpha);
                     break;
+                case 3: //Audio
+                    string rutaArchivo = ((ConfiguracionSeñalAudio)(PanelConfiguracion.Children[0])).txtRutaArchivo.Text;
+                    señal = new SeñalAudio(rutaArchivo);
+                    txtbox_tiempoInicial.Text = señal.TiempoInicial.ToString();
+                    txtbox_tiempoFinal.Text = señal.TiempoFinal.ToString();
+                    txtbox_muestreo.Text = señal.FrecuenciaMuestreo.ToString();
+                    break;
                 default:
                     señal = null;
                     break;
             }
 
-            señal.TiempoInicial = tiempoInicial;
-            señal.TiempoFinal = tiempoFinal;
-            señal.FrecuenciaMuestreo = muestro;
+            if(CbTipoSeñal.SelectedIndex != 3)
+            {
+                señal.TiempoInicial = tiempoInicial;
+                señal.TiempoFinal = tiempoFinal;
+                señal.FrecuenciaMuestreo = muestro;
 
-            señal.construirSeñal();
+                señal.construirSeñal();
+            }
 
             double amplitudMaxima = señal.AmplitudMaxima;
 
@@ -118,6 +128,9 @@ namespace GraficadorSeñales
                     break;
                 case 2: //Exponencial
                     PanelConfiguracion.Children.Add(new ConfiguracionSeñalExponencial());
+                    break;
+                case 3: //Audio
+                    PanelConfiguracion.Children.Add(new ConfiguracionSeñalAudio());
                     break;
                 default:
                     break;
