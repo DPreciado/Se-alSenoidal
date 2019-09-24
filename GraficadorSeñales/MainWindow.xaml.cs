@@ -29,14 +29,15 @@ namespace GraficadorSeñales
 
         private void BtnGraficar_Click(object sender, RoutedEventArgs e)
         {
-            
+
             double tiempoInicial = double.Parse(txtbox_tiempoInicial.Text);
             double tiempoFinal = double.Parse(txtbox_tiempoFinal.Text);
             double muestro = double.Parse(txtbox_muestreo.Text);
 
             Señal señal;
+            Señal señalResultante;
 
-            switch(CbTipoSeñal.SelectedIndex)
+            switch (CbTipoSeñal.SelectedIndex)
             {
                 case 0: //Parabolica
                     señal = new SeñalParabolica();
@@ -60,7 +61,7 @@ namespace GraficadorSeñales
                     señal = new SeñalSenoidal(amplitud, fase, frecuencia);
                     break;
                 case 2: //Exponencial
-                    double alpha = 
+                    double alpha =
                         double.Parse(
                             ((ConfiguracionSeñalExponencial)(PanelConfiguracion.Children[0])).txt_alpha.Text
                     );
@@ -78,7 +79,7 @@ namespace GraficadorSeñales
                     break;
             }
 
-            if(CbTipoSeñal.SelectedIndex != 3)
+            if (CbTipoSeñal.SelectedIndex != 3)
             {
                 señal.TiempoInicial = tiempoInicial;
                 señal.TiempoFinal = tiempoFinal;
@@ -87,18 +88,51 @@ namespace GraficadorSeñales
                 señal.construirSeñal();
             }
 
+            switch (CbOperacion.SelectedIndex)
+            {
+                case 0: //Escala de amplitud
+                    double factorEscala =
+                        double.Parse(
+                            ((OperacionEscalaAmplitud)(PanelConfiguracionOperacion.Children[0])).txtFactorEscala.Text
+                        );
+                    señalResultante = Señal.escalaAmplitud(señal, factorEscala);
+                    break;
+                case 1: //Desplazamiento de amplitud
+                    double factorDesplazamiento = double.Parse(
+                        ((OperacionDesplazamientoAmplitud)(PanelConfiguracionOperacion.Children[0])).txtFactorDesplazamiento.Text
+                        );
+                    señalResultante = Señal.desplazamientoAmplitud(señal, factorDesplazamiento);
+                    break;
+                default:
+                    señalResultante = null;
+                    break;
+            }
+
             double amplitudMaxima = señal.AmplitudMaxima;
+            
 
             plnGrafica.Points.Clear();
+            plnGraficaResultante.Points.Clear();
 
-            foreach(Muestra muestra in señal.Muestras)
+
+            foreach (Muestra muestra in señal.Muestras)
             {
                 plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
 
-            lblLimiteSuperior.Text = amplitudMaxima.ToString();
-            lblLimiteInferior.Text = "-" + amplitudMaxima.ToString();
+            foreach (Muestra muestra in señalResultante.Muestras)
+            {
+                plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
+            }
+            //original
+            lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
+            lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
 
+            //resultado
+            lblLimiteInferiorResultante.Text = "-" + amplitudMaxima.ToString("F");
+            lblLimiteSuperiorResultante.Text = amplitudMaxima.ToString("F");
+
+            //original
             plnEjeX.Points.Clear();
             plnEjeX.Points.Add(adaptarCoordenadas(tiempoInicial,0.0,tiempoInicial, amplitudMaxima));
             plnEjeX.Points.Add(adaptarCoordenadas(tiempoFinal, 0.0,tiempoInicial, amplitudMaxima));
@@ -106,6 +140,15 @@ namespace GraficadorSeñales
             plnEjeY.Points.Clear();
             plnEjeY.Points.Add(adaptarCoordenadas(0.0, amplitudMaxima, tiempoInicial, amplitudMaxima));
             plnEjeY.Points.Add(adaptarCoordenadas(0.0, -amplitudMaxima, tiempoInicial, amplitudMaxima));
+
+            //resultado
+            plnEjeXResultante.Points.Clear();
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoInicial, 0.0, tiempoInicial, amplitudMaxima));
+            plnEjeXResultante.Points.Add(adaptarCoordenadas(tiempoFinal, 0.0, tiempoInicial, amplitudMaxima));
+
+            plnEjeYResultante.Points.Clear();
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, amplitudMaxima, tiempoInicial, amplitudMaxima));
+            plnEjeYResultante.Points.Add(adaptarCoordenadas(0.0, -amplitudMaxima, tiempoInicial, amplitudMaxima));
         }
 
         public Point adaptarCoordenadas(double x, double y, double tiempoInicial, double amplitudMaxima)
@@ -133,6 +176,20 @@ namespace GraficadorSeñales
                     PanelConfiguracion.Children.Add(new ConfiguracionSeñalAudio());
                     break;
                 default:
+                    break;
+            }
+        }
+
+        private void CbOperacion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PanelConfiguracionOperacion.Children.Clear();
+            switch (CbOperacion.SelectedIndex)
+            {
+                case 0: //Escala de amplitud
+                    PanelConfiguracionOperacion.Children.Add(new OperacionEscalaAmplitud());
+                    break;
+                case 1: //Desplazamiento de amplitud
+                    PanelConfiguracionOperacion.Children.Add(new OperacionDesplazamientoAmplitud());
                     break;
             }
         }
