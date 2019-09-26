@@ -23,8 +23,7 @@ namespace GraficadorSeñales
         public MainWindow()
         {
             InitializeComponent();
-
-            
+            mostrarSegundaSeñal(false);
         }
 
         private void BtnGraficar_Click(object sender, RoutedEventArgs e)
@@ -120,10 +119,14 @@ namespace GraficadorSeñales
                 plnGrafica.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
             }
 
-            foreach (Muestra muestra in señalResultante.Muestras)
+            if(CbOperacion.SelectedIndex != -1)
             {
-                plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
+                foreach (Muestra muestra in señalResultante.Muestras)
+                {
+                    plnGraficaResultante.Points.Add(adaptarCoordenadas(muestra.X, muestra.Y, tiempoInicial, amplitudMaxima));
+                }
             }
+            
             //original
             lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
             lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
@@ -183,6 +186,7 @@ namespace GraficadorSeñales
         private void CbOperacion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PanelConfiguracionOperacion.Children.Clear();
+            mostrarSegundaSeñal(false);
             switch (CbOperacion.SelectedIndex)
             {
                 case 0: //Escala de amplitud
@@ -191,6 +195,48 @@ namespace GraficadorSeñales
                 case 1: //Desplazamiento de amplitud
                     PanelConfiguracionOperacion.Children.Add(new OperacionDesplazamientoAmplitud());
                     break;
+                case 2: //Multiplicador de señales
+                    mostrarSegundaSeñal(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void CbTipoSeñal_2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PanelConfiguracion_2.Children.Clear();
+            switch (CbTipoSeñal_2.SelectedIndex)
+            {
+                case 0: //Exponencial
+                    break;
+                case 1: //Senoidal
+                    PanelConfiguracion_2.Children.Add(new ConfiguracionSeñalSenoidal());
+                    break;
+                case 2: //Exponencial
+                    PanelConfiguracion_2.Children.Add(new ConfiguracionSeñalExponencial());
+                    break;
+                case 3: //Audio
+                    PanelConfiguracion_2.Children.Add(new ConfiguracionSeñalAudio());
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void mostrarSegundaSeñal(bool mostrar)
+        {
+            if (mostrar)
+            {
+                lblTipoSeñal_2.Visibility = Visibility.Visible;
+                CbTipoSeñal_2.Visibility = Visibility.Visible;
+                PanelConfiguracion_2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lblTipoSeñal_2.Visibility = Visibility.Hidden;
+                CbTipoSeñal_2.Visibility = Visibility.Hidden;
+                PanelConfiguracion_2.Visibility = Visibility.Hidden;
             }
         }
     }
