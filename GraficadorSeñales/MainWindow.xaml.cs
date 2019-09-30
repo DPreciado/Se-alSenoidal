@@ -102,6 +102,11 @@ namespace GraficadorSeñales
                         );
                     señalResultante = Señal.desplazamientoAmplitud(señal, factorDesplazamiento);
                     break;
+                case 3: //Escala exponencial
+                    double exponente = double.Parse(
+                        ((OperacionEscalaExponencial)(PanelConfiguracionOperacion.Children[0])).txtExponente.Text);
+                    señalResultante = Señal.escalaExponencial(señal, exponente);
+                    break;
                 default:
                     señalResultante = null;
                     break;
@@ -197,6 +202,9 @@ namespace GraficadorSeñales
                     break;
                 case 2: //Multiplicador de señales
                     mostrarSegundaSeñal(true);
+                    break;
+                case 3: //Escala Exponencial
+                    PanelConfiguracionOperacion.Children.Add(new OperacionEscalaExponencial());
                     break;
                 default:
                     break;
