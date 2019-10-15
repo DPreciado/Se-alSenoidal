@@ -50,6 +50,7 @@
             <ComboBoxItem>Desplazamiento de amplitud</ComboBoxItem>
             <ComboBoxItem>Multiplicacion de señales</ComboBoxItem>
             <ComboBoxItem>Escala exponencial</ComboBoxItem>
+            <ComboBoxItem>Transformada de fourier</ComboBoxItem>
         </ComboBox>
         <TextBlock x:Name="lblTipoSeñal_2" HorizontalAlignment="Left" Margin="510,10,0,0" TextWrapping="Wrap" Text="Señal Parabolica" VerticalAlignment="Top"/>
 

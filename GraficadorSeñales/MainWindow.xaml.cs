@@ -137,6 +137,7 @@ namespace GraficadorSeñales
                     segundaSeñal.TiempoInicial = tiempoInicial;
                     segundaSeñal.TiempoFinal = tiempoFinal;
                     segundaSeñal.FrecuenciaMuestreo = muestro;
+
                     segundaSeñal.construirSeñal();
                 }
             }
