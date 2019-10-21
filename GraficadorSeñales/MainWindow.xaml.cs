@@ -165,6 +165,9 @@ namespace GraficadorSeñales
                         ((OperacionEscalaExponencial)(PanelConfiguracionOperacion.Children[0])).txtExponente.Text);
                     señalResultante = Señal.escalaExponencial(señal, exponente);
                     break;
+                case 4://Transformada de fourier
+                    señalResultante = Señal.tranformadaFourier(señal);
+                    break;
                 default:
                     señalResultante = null;
                     break;
@@ -205,6 +208,9 @@ namespace GraficadorSeñales
             //original
             lblLimiteSuperior.Text = amplitudMaxima.ToString("F");
             lblLimiteInferior.Text = "-" + amplitudMaxima.ToString("F");
+
+            //Hz
+            //lblHz.Text = (lblLimiteSuperior.Text * señal.FrecuenciaMuestreo;
 
             //resultado
             lblLimiteInferiorResultante.Text = "-" + amplitudMaxima.ToString("F");
